@@ -124,7 +124,7 @@ class Viewer {
       options.transition = false;
     }
 
-    if (options.inline) {
+    if (options.inline && !options.inline_change_default) {
       let count = 0;
       const progress = () => {
         count += 1;
@@ -220,10 +220,7 @@ class Viewer {
     if (options.backdrop) {
       addClass(viewer, `${NAMESPACE}-backdrop`);
 
-      if (!options.inline && options.backdrop !== 'static') {
-        setData(canvas, DATA_ACTION, 'hide');
-      }
-      if (options.data_hide) {
+      if ((!options.inline || options.inline_change_default) && options.backdrop !== 'static') {
         setData(canvas, DATA_ACTION, 'hide');
       }
     }
@@ -307,7 +304,13 @@ class Viewer {
     }
 
     if (options.inline) {
-      addClass(button, CLASS_FULLSCREEN);
+      if (options.inline_change_default) {
+        addClass(button, CLASS_CLOSE);
+        addClass(viewer, CLASS_FADE);
+        addClass(viewer, CLASS_HIDE);
+      } else {
+        addClass(button, CLASS_FULLSCREEN);
+      }
       setStyle(viewer, {
         zIndex: options.zIndexInline,
       });
@@ -342,7 +345,7 @@ class Viewer {
       container.appendChild(viewer);
     }
 
-    if (options.inline) {
+    if (options.inline && !options.inline_change_default) {
       this.render();
       this.bind();
       this.isShown = true;
@@ -361,7 +364,7 @@ class Viewer {
       return;
     }
 
-    if (this.ready && options.inline) {
+    if (this.ready && options.inline && !options.inline_change_default) {
       this.view(this.index);
     }
   }
