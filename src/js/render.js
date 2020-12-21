@@ -58,7 +58,7 @@ export default {
       this.parentData = viewerData;
     }
 
-    if (this.fulled || !viewerData) {
+    if (this.fulled || !options.inlineChangeDefault || !viewerData) {
       viewerData = this.containerData;
     }
 
