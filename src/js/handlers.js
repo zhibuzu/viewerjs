@@ -50,7 +50,7 @@ export default {
       case 'mix':
         if (this.played) {
           this.stop();
-        } else if (options.inline) {
+        } else if (options.inline && !options.inlineChangeDefault) {
           if (this.fulled) {
             this.exit();
           } else {
@@ -252,7 +252,7 @@ export default {
       case 27:
         if (this.played) {
           this.stop();
-        } else if (options.inline) {
+        } else if (options.inline && !options.inlineChangeDefault) {
           if (this.fulled) {
             this.exit();
           }

@@ -1,11 +1,11 @@
 /*!
- * Viewer.js v1.0.1
+ * Viewer.js v1.0.2
  * https://zhibuzu.github.io/viewerjs
  *
  * Copyright 2015-present Jesse Hu
  * Released under the MIT license
  *
- * Date: 2020-12-21T11:53:12.056Z
+ * Date: 2020-12-21T12:14:03.492Z
  */
 
 (function (global, factory) {
@@ -1353,7 +1353,7 @@
         case 'mix':
           if (this.played) {
             this.stop();
-          } else if (options.inline) {
+          } else if (options.inline && !options.inlineChangeDefault) {
             if (this.fulled) {
               this.exit();
             } else {
@@ -1540,7 +1540,7 @@
         case 27:
           if (this.played) {
             this.stop();
-          } else if (options.inline) {
+          } else if (options.inline && !options.inlineChangeDefault) {
             if (this.fulled) {
               this.exit();
             }
@@ -1801,7 +1801,7 @@
       var element = this.element,
           options = this.options;
 
-      if (options.inline || this.showing || this.isShown || this.showing) {
+      if (options.inline && !options.inlineChangeDefault || this.showing || this.isShown || this.showing) {
         return this;
       }
 
@@ -1873,7 +1873,7 @@
       var element = this.element,
           options = this.options;
 
-      if (options.inline || this.hiding || !(this.isShown || this.showing)) {
+      if (options.inline && !options.inlineChangeDefault || this.hiding || !(this.isShown || this.showing)) {
         return this;
       }
 
@@ -2912,7 +2912,7 @@
           this.stop();
         }
 
-        if (options.inline) {
+        if (options.inline && !options.inlineChangeDefault) {
           if (this.fulled) {
             this.exit();
           }
@@ -3244,7 +3244,7 @@
           options.transition = false;
         }
 
-        if (options.inline && !options.inline_change_default) {
+        if (options.inline && !options.inlineChangeDefault) {
           var count = 0;
 
           var progress = function progress() {
@@ -3337,7 +3337,7 @@
         if (options.backdrop) {
           addClass(viewer, "".concat(NAMESPACE, "-backdrop"));
 
-          if ((!options.inline || options.inline_change_default) && options.backdrop !== 'static') {
+          if ((!options.inline || options.inlineChangeDefault) && options.backdrop !== 'static') {
             setData(canvas, DATA_ACTION, 'hide');
           }
         }
@@ -3414,7 +3414,7 @@
         }
 
         if (options.inline) {
-          if (options.inline_change_default) {
+          if (options.inlineChangeDefault) {
             addClass(button, CLASS_CLOSE);
             addClass(viewer, CLASS_FADE);
             addClass(viewer, CLASS_HIDE);
@@ -3454,7 +3454,7 @@
           container.appendChild(viewer);
         }
 
-        if (options.inline && !options.inline_change_default) {
+        if (options.inline && !options.inlineChangeDefault) {
           this.render();
           this.bind();
           this.isShown = true;
@@ -3473,7 +3473,7 @@
           return;
         }
 
-        if (this.ready && options.inline && !options.inline_change_default) {
+        if (this.ready && options.inline && !options.inlineChangeDefault) {
           this.view(this.index);
         }
       }

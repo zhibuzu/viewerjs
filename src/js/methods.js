@@ -56,7 +56,8 @@ export default {
   show(immediate = false) {
     const { element, options } = this;
 
-    if (options.inline || this.showing || this.isShown || this.showing) {
+    if ((options.inline && !options.inlineChangeDefault) || this.showing
+    || this.isShown || this.showing) {
       return this;
     }
 
@@ -129,7 +130,8 @@ export default {
   hide(immediate = false) {
     const { element, options } = this;
 
-    if (options.inline || this.hiding || !(this.isShown || this.showing)) {
+    if ((options.inline && !options.inlineChangeDefault) || this.hiding
+     || !(this.isShown || this.showing)) {
       return this;
     }
 
@@ -1171,7 +1173,7 @@ export default {
         this.stop();
       }
 
-      if (options.inline) {
+      if (options.inline && !options.inlineChangeDefault) {
         if (this.fulled) {
           this.exit();
         }
