@@ -1,5 +1,5 @@
 {
-  "name": "woo-viewerjs",
+  "name": "jessehu-viewerjs",
   "description": "JavaScript image viewer for weibo feed.",
   "version": "1.0.0",
   "main": "dist/viewer.common.js",
@@ -115,5 +115,6 @@
   "lint-staged": {
     "{src,test}/**/*.js|*.conf*.js": "eslint --fix",
     "{src,docs}/**/*.{css,scss,html}": "stylelint --fix"
-  }
+  },
+  "dependencies": {}
 }
