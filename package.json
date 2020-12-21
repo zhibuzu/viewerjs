@@ -1,5 +1,5 @@
 {
-  "name": "jessehu-viewerjs",
+  "name": "@jessehu/viewerjs",
   "description": "JavaScript image viewer for weibo feed.",
   "version": "1.0.0",
   "main": "dist/viewer.common.js",

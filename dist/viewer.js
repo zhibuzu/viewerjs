@@ -1,11 +1,11 @@
 /*!
- * Viewer.js v1.9.0
- * https://fengyuanchen.github.io/viewerjs
+ * Viewer.js v1.0.0
+ * https://zhibuzu.github.io/viewerjs
  *
- * Copyright 2015-present Chen Fengyuan
+ * Copyright 2015-present Jesse Hu
  * Released under the MIT license
  *
- * Date: 2020-12-06T11:25:15.688Z
+ * Date: 2020-12-21T11:31:05.856Z
  */
 
 (function (global, factory) {
@@ -3338,6 +3338,10 @@
           addClass(viewer, "".concat(NAMESPACE, "-backdrop"));
 
           if (!options.inline && options.backdrop !== 'static') {
+            setData(canvas, DATA_ACTION, 'hide');
+          }
+
+          if (options.data_hide) {
             setData(canvas, DATA_ACTION, 'hide');
           }
         }

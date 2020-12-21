@@ -223,6 +223,9 @@ class Viewer {
       if (!options.inline && options.backdrop !== 'static') {
         setData(canvas, DATA_ACTION, 'hide');
       }
+      if (options.data_hide) {
+        setData(canvas, DATA_ACTION, 'hide');
+      }
     }
 
     if (isString(options.className) && options.className) {
