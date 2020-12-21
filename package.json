@@ -1,7 +1,7 @@
 {
-  "name": "viewerjs",
-  "description": "JavaScript image viewer.",
-  "version": "1.9.0",
+  "name": "woo-viewerjs",
+  "description": "JavaScript image viewer for weibo feed.",
+  "version": "1.0.0",
   "main": "dist/viewer.common.js",
   "module": "dist/viewer.esm.js",
   "browser": "dist/viewer.js",
@@ -33,7 +33,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fengyuanchen/viewerjs.git"
+    "url": "git+https://github.com/zhibuzu/viewerjs.git"
   },
   "keywords": [
     "image",
@@ -47,14 +47,14 @@
     "web"
   ],
   "author": {
-    "name": "Chen Fengyuan",
-    "url": "https://chenfengyuan.com/"
+    "name": "Jesse Hu",
+    "url": "https://blog.hulifa.cn/"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/fengyuanchen/viewerjs/issues"
+    "url": "https://github.com/zhibuzu/viewerjs/issues"
   },
-  "homepage": "https://fengyuanchen.github.io/viewerjs",
+  "homepage": "https://zhibuzu.github.io/viewerjs",
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/preset-env": "^7.12.7",
