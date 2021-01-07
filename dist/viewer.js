@@ -1,11 +1,11 @@
 /*!
- * Viewer.js v1.0.4
+ * Viewer.js v1.0.5
  * https://zhibuzu.github.io/viewerjs
  *
  * Copyright 2015-present Jesse Hu
  * Released under the MIT license
  *
- * Date: 2020-12-21T13:15:08.994Z
+ * Date: 2021-01-07T06:49:59.422Z
  */
 
 (function (global, factory) {
@@ -1185,18 +1185,19 @@
       };
       sizingImage = getImageNaturalSizes(image, options, function (naturalWidth, naturalHeight) {
         var aspectRatio = naturalWidth / naturalHeight;
-        var width = viewerWidth;
-        var height = viewerHeight;
-        _this2.imageInitializing = false;
+        var width = viewerWidth; // let height = viewerHeight;
 
-        if (viewerHeight * aspectRatio > viewerWidth) {
-          height = viewerWidth / aspectRatio;
-        } else {
-          width = viewerHeight * aspectRatio;
-        }
+        var height = viewerWidth / aspectRatio;
+        _this2.imageInitializing = false; // if (viewerHeight * aspectRatio > viewerWidth) {
+        //   height = viewerWidth / aspectRatio;
+        // } else {
+        //   width = viewerHeight * aspectRatio;
+        // }
+        // width = Math.min(width * 0.9, naturalWidth);
+        // height = Math.min(height * 0.9, naturalHeight);
 
-        width = Math.min(width * 0.9, naturalWidth);
-        height = Math.min(height * 0.9, naturalHeight);
+        width *= 0.9;
+        height *= 0.9;
         var left = (viewerWidth - width) / 2;
         var top = (viewerHeight - height) / 2;
         var imageData = {

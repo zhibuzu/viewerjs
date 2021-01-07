@@ -183,18 +183,22 @@ export default {
     sizingImage = getImageNaturalSizes(image, options, (naturalWidth, naturalHeight) => {
       const aspectRatio = naturalWidth / naturalHeight;
       let width = viewerWidth;
-      let height = viewerHeight;
+      // let height = viewerHeight;
+      let height = viewerWidth / aspectRatio;
 
       this.imageInitializing = false;
 
-      if (viewerHeight * aspectRatio > viewerWidth) {
-        height = viewerWidth / aspectRatio;
-      } else {
-        width = viewerHeight * aspectRatio;
-      }
+      // if (viewerHeight * aspectRatio > viewerWidth) {
+      //   height = viewerWidth / aspectRatio;
+      // } else {
+      //   width = viewerHeight * aspectRatio;
+      // }
 
-      width = Math.min(width * 0.9, naturalWidth);
-      height = Math.min(height * 0.9, naturalHeight);
+      // width = Math.min(width * 0.9, naturalWidth);
+      // height = Math.min(height * 0.9, naturalHeight);
+
+      width *= 0.9;
+      height *= 0.9;
 
       const left = (viewerWidth - width) / 2;
       const top = (viewerHeight - height) / 2;
