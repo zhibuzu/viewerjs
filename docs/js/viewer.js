@@ -1,11 +1,11 @@
 /*!
- * Viewer.js v1.0.5
+ * Viewer.js v1.0.6
  * https://zhibuzu.github.io/viewerjs
  *
  * Copyright 2015-present Jesse Hu
  * Released under the MIT license
  *
- * Date: 2021-01-07T06:49:59.422Z
+ * Date: 2021-01-07T07:05:54.339Z
  */
 
 (function (global, factory) {
@@ -1200,6 +1200,8 @@
         height *= 0.9;
         var left = (viewerWidth - width) / 2;
         var top = (viewerHeight - height) / 2;
+        left = Math.max(left, 10);
+        top = Math.max(top, 10);
         var imageData = {
           left: left,
           top: top,

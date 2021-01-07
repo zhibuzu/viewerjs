@@ -200,8 +200,10 @@ export default {
       width *= 0.9;
       height *= 0.9;
 
-      const left = (viewerWidth - width) / 2;
-      const top = (viewerHeight - height) / 2;
+      let left = (viewerWidth - width) / 2;
+      let top = (viewerHeight - height) / 2;
+      left = Math.max(left, 10);
+      top = Math.max(top, 10);
 
       const imageData = {
         left,
