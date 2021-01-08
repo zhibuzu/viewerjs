@@ -32,10 +32,14 @@ import {
 
 export default {
   click(event) {
-    console.log('click', event);
-    const { options, imageData } = this;
+    const { options, imageData, canvas } = this;
     let { target } = event;
-    let action = getData(target, DATA_ACTION);
+    let action;
+    if (options.cursorMode) {
+      action = getData(canvas, DATA_ACTION);
+    } else {
+      action = getData(target, DATA_ACTION);
+    }
 
     if (!action && target.localName === 'img' && target.parentElement.localName === 'li') {
       target = target.parentElement;
@@ -116,7 +120,7 @@ export default {
         break;
 
       case 'cursor':
-        this.cursor(target);
+        this.cursor();
         break;
 
       default:
@@ -545,23 +549,23 @@ export default {
 
     event.preventDefault();
 
-    const { target } = event;
-    const targetRect = target.getBoundingClientRect();
+    const { currentTarget } = event;
+    const targetRect = currentTarget.getBoundingClientRect();
     const offsetX = event.clientX - targetRect.left; // 鼠标事件发生时，鼠标和目标DOM节点的水平位置偏移
     const targetWidth = targetRect.width;
 
     if (offsetX < targetWidth * 0.35) {
-      removeClass(target, 'smallcursor');
-      removeClass(target, 'rightcursor');
-      addClass(target, 'leftcursor');
+      removeClass(currentTarget, 'smallcursor');
+      removeClass(currentTarget, 'rightcursor');
+      addClass(currentTarget, 'leftcursor');
     } else if (offsetX < targetWidth * 0.65) {
-      removeClass(target, 'leftcursor');
-      removeClass(target, 'rightcursor');
-      addClass(target, 'smallcursor');
+      removeClass(currentTarget, 'leftcursor');
+      removeClass(currentTarget, 'rightcursor');
+      addClass(currentTarget, 'smallcursor');
     } else {
-      removeClass(target, 'leftcursor');
-      removeClass(target, 'smallcursor');
-      addClass(target, 'rightcursor');
+      removeClass(currentTarget, 'leftcursor');
+      removeClass(currentTarget, 'smallcursor');
+      addClass(currentTarget, 'rightcursor');
     }
   },
 };

@@ -1,11 +1,11 @@
 /*!
- * Viewer.js v1.0.7
+ * Viewer.js v1.0.12
  * https://zhibuzu.github.io/viewerjs
  *
  * Copyright 2015-present Jesse Hu
  * Released under the MIT license
  *
- * Date: 2021-01-08T07:58:04.069Z
+ * Date: 2021-01-08T08:19:31.403Z
  */
 
 function _typeof(obj) {
@@ -1333,11 +1333,17 @@ var events = {
 
 var handlers = {
   click: function click(event) {
-    console.log('click', event);
     var options = this.options,
-        imageData = this.imageData;
+        imageData = this.imageData,
+        canvas = this.canvas;
     var target = event.target;
-    var action = getData(target, DATA_ACTION);
+    var action;
+
+    if (options.cursorMode) {
+      action = getData(canvas, DATA_ACTION);
+    } else {
+      action = getData(target, DATA_ACTION);
+    }
 
     if (!action && target.localName === 'img' && target.parentElement.localName === 'li') {
       target = target.parentElement;
@@ -1418,7 +1424,7 @@ var handlers = {
         break;
 
       case 'cursor':
-        this.cursor(target);
+        this.cursor();
         break;
 
       default:
@@ -1799,24 +1805,24 @@ var handlers = {
     }
 
     event.preventDefault();
-    var target = event.target;
-    var targetRect = target.getBoundingClientRect();
+    var currentTarget = event.currentTarget;
+    var targetRect = currentTarget.getBoundingClientRect();
     var offsetX = event.clientX - targetRect.left; // 鼠标事件发生时，鼠标和目标DOM节点的水平位置偏移
 
     var targetWidth = targetRect.width;
 
     if (offsetX < targetWidth * 0.35) {
-      removeClass(target, 'smallcursor');
-      removeClass(target, 'rightcursor');
-      addClass(target, 'leftcursor');
+      removeClass(currentTarget, 'smallcursor');
+      removeClass(currentTarget, 'rightcursor');
+      addClass(currentTarget, 'leftcursor');
     } else if (offsetX < targetWidth * 0.65) {
-      removeClass(target, 'leftcursor');
-      removeClass(target, 'rightcursor');
-      addClass(target, 'smallcursor');
+      removeClass(currentTarget, 'leftcursor');
+      removeClass(currentTarget, 'rightcursor');
+      addClass(currentTarget, 'smallcursor');
     } else {
-      removeClass(target, 'leftcursor');
-      removeClass(target, 'smallcursor');
-      addClass(target, 'rightcursor');
+      removeClass(currentTarget, 'leftcursor');
+      removeClass(currentTarget, 'smallcursor');
+      addClass(currentTarget, 'rightcursor');
     }
   }
 };
@@ -2160,14 +2166,13 @@ var methods = {
 
   /**
    * 点击viewer-canvas左中右不同区域，分别进行前一张、隐藏、后一张操作
-   * @param {Canvas} target - Canvas
    */
-  cursor: function cursor(target) {
-    console.log('target', target);
+  cursor: function cursor() {
+    var canvas = this.canvas;
 
-    if (hasClass(target, 'leftcursor')) {
+    if (hasClass(canvas, 'leftcursor')) {
       this.prev(true);
-    } else if (hasClass(target, 'rightcursor')) {
+    } else if (hasClass(canvas, 'rightcursor')) {
       this.next(true);
     } else {
       this.hide();
