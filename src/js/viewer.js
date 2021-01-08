@@ -221,7 +221,7 @@ class Viewer {
       addClass(viewer, `${NAMESPACE}-backdrop`);
 
       if ((!options.inline || options.inlineChangeDefault) && options.backdrop !== 'static') {
-        setData(canvas, DATA_ACTION, 'hide');
+        setData(canvas, DATA_ACTION, 'cursor');
       }
     }
 

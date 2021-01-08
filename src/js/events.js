@@ -26,6 +26,7 @@ export default {
     addListener(document, EVENT_POINTER_UP, (this.onPointerUp = this.pointerup.bind(this)));
     addListener(document, EVENT_KEY_DOWN, (this.onKeyDown = this.keydown.bind(this)));
     addListener(window, EVENT_RESIZE, (this.onResize = this.resize.bind(this)));
+    addListener(canvas, EVENT_POINTER_MOVE, (this.onMouseMove = this.mousemove.bind(this)));
 
     if (options.zoomable && options.zoomOnWheel) {
       addListener(viewer, EVENT_WHEEL, (this.onWheel = this.wheel.bind(this)), {
@@ -50,6 +51,7 @@ export default {
     removeListener(document, EVENT_POINTER_UP, this.onPointerUp);
     removeListener(document, EVENT_KEY_DOWN, this.onKeyDown);
     removeListener(window, EVENT_RESIZE, this.onResize);
+    removeListener(canvas, EVENT_POINTER_MOVE, this.onMouseMove);
 
     if (options.zoomable && options.zoomOnWheel) {
       removeListener(viewer, EVENT_WHEEL, this.onWheel, {

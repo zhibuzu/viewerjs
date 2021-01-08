@@ -1,11 +1,11 @@
 /*!
- * Viewer.js v1.0.6
+ * Viewer.js v1.0.7
  * https://zhibuzu.github.io/viewerjs
  *
  * Copyright 2015-present Jesse Hu
  * Released under the MIT license
  *
- * Date: 2021-01-07T07:05:54.339Z
+ * Date: 2021-01-08T07:58:04.069Z
  */
 
 'use strict';
@@ -1293,6 +1293,7 @@ var events = {
     addListener(document, EVENT_POINTER_UP, this.onPointerUp = this.pointerup.bind(this));
     addListener(document, EVENT_KEY_DOWN, this.onKeyDown = this.keydown.bind(this));
     addListener(window, EVENT_RESIZE, this.onResize = this.resize.bind(this));
+    addListener(canvas, EVENT_POINTER_MOVE, this.onMouseMove = this.mousemove.bind(this));
 
     if (options.zoomable && options.zoomOnWheel) {
       addListener(viewer, EVENT_WHEEL, this.onWheel = this.wheel.bind(this), {
@@ -1317,6 +1318,7 @@ var events = {
     removeListener(document, EVENT_POINTER_UP, this.onPointerUp);
     removeListener(document, EVENT_KEY_DOWN, this.onKeyDown);
     removeListener(window, EVENT_RESIZE, this.onResize);
+    removeListener(canvas, EVENT_POINTER_MOVE, this.onMouseMove);
 
     if (options.zoomable && options.zoomOnWheel) {
       removeListener(viewer, EVENT_WHEEL, this.onWheel, {
@@ -1333,6 +1335,7 @@ var events = {
 
 var handlers = {
   click: function click(event) {
+    console.log('click', event);
     var options = this.options,
         imageData = this.imageData;
     var target = event.target;
@@ -1414,6 +1417,10 @@ var handlers = {
 
       case 'flip-vertical':
         this.scaleY(-imageData.scaleY || -1);
+        break;
+
+      case 'cursor':
+        this.cursor(target);
         break;
 
       default:
@@ -1787,6 +1794,32 @@ var handlers = {
     }
 
     this.zoom(-delta * ratio, true, event);
+  },
+  mousemove: function mousemove(event) {
+    if (!this.viewed) {
+      return;
+    }
+
+    event.preventDefault();
+    var target = event.target;
+    var targetRect = target.getBoundingClientRect();
+    var offsetX = event.clientX - targetRect.left; // 鼠标事件发生时，鼠标和目标DOM节点的水平位置偏移
+
+    var targetWidth = targetRect.width;
+
+    if (offsetX < targetWidth * 0.35) {
+      removeClass(target, 'smallcursor');
+      removeClass(target, 'rightcursor');
+      addClass(target, 'leftcursor');
+    } else if (offsetX < targetWidth * 0.65) {
+      removeClass(target, 'leftcursor');
+      removeClass(target, 'rightcursor');
+      addClass(target, 'smallcursor');
+    } else {
+      removeClass(target, 'leftcursor');
+      removeClass(target, 'smallcursor');
+      addClass(target, 'rightcursor');
+    }
   }
 };
 
@@ -2125,6 +2158,22 @@ var methods = {
 
     this.view(index);
     return this;
+  },
+
+  /**
+   * 点击viewer-canvas左中右不同区域，分别进行前一张、隐藏、后一张操作
+   * @param {Canvas} target - Canvas
+   */
+  cursor: function cursor(target) {
+    console.log('target', target);
+
+    if (hasClass(target, 'leftcursor')) {
+      this.prev(true);
+    } else if (hasClass(target, 'rightcursor')) {
+      this.next(true);
+    } else {
+      this.hide();
+    }
   },
 
   /**
@@ -3337,7 +3386,7 @@ var Viewer = /*#__PURE__*/function () {
         addClass(viewer, "".concat(NAMESPACE, "-backdrop"));
 
         if ((!options.inline || options.inlineChangeDefault) && options.backdrop !== 'static') {
-          setData(canvas, DATA_ACTION, 'hide');
+          setData(canvas, DATA_ACTION, 'cursor');
         }
       }
 

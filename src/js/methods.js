@@ -391,6 +391,21 @@ export default {
   },
 
   /**
+   * 点击viewer-canvas左中右不同区域，分别进行前一张、隐藏、后一张操作
+   * @param {Canvas} target - Canvas
+   */
+  cursor(target) {
+    console.log('target', target);
+    if (hasClass(target, 'leftcursor')) {
+      this.prev(true);
+    } else if (hasClass(target, 'rightcursor')) {
+      this.next(true);
+    } else {
+      this.hide();
+    }
+  },
+
+  /**
    * Move the image with relative offsets.
    * @param {number} x - The moving distance in the horizontal direction.
    * @param {number} [y=x] The moving distance in the vertical direction.

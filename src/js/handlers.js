@@ -32,6 +32,7 @@ import {
 
 export default {
   click(event) {
+    console.log('click', event);
     const { options, imageData } = this;
     let { target } = event;
     let action = getData(target, DATA_ACTION);
@@ -112,6 +113,10 @@ export default {
 
       case 'flip-vertical':
         this.scaleY(-imageData.scaleY || -1);
+        break;
+
+      case 'cursor':
+        this.cursor(target);
         break;
 
       default:
@@ -531,5 +536,32 @@ export default {
     }
 
     this.zoom(-delta * ratio, true, event);
+  },
+
+  mousemove(event) {
+    if (!this.viewed) {
+      return;
+    }
+
+    event.preventDefault();
+
+    const { target } = event;
+    const targetRect = target.getBoundingClientRect();
+    const offsetX = event.clientX - targetRect.left; // 鼠标事件发生时，鼠标和目标DOM节点的水平位置偏移
+    const targetWidth = targetRect.width;
+
+    if (offsetX < targetWidth * 0.35) {
+      removeClass(target, 'smallcursor');
+      removeClass(target, 'rightcursor');
+      addClass(target, 'leftcursor');
+    } else if (offsetX < targetWidth * 0.65) {
+      removeClass(target, 'leftcursor');
+      removeClass(target, 'rightcursor');
+      addClass(target, 'smallcursor');
+    } else {
+      removeClass(target, 'leftcursor');
+      removeClass(target, 'smallcursor');
+      addClass(target, 'rightcursor');
+    }
   },
 };
