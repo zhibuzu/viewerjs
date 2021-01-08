@@ -35,7 +35,7 @@ export default {
     const { options, imageData, canvas } = this;
     let { target } = event;
     let action;
-    if (options.cursorMode) {
+    if (options.cursorMode && (target === this.canvas || target.parentElement === this.canvas)) {
       action = getData(canvas, DATA_ACTION);
     } else {
       action = getData(target, DATA_ACTION);

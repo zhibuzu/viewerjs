@@ -1,11 +1,11 @@
 /*!
- * Viewer.js v1.0.12
+ * Viewer.js v1.0.13
  * https://zhibuzu.github.io/viewerjs
  *
  * Copyright 2015-present Jesse Hu
  * Released under the MIT license
  *
- * Date: 2021-01-08T08:19:31.403Z
+ * Date: 2021-01-08T08:41:03.556Z
  */
 
 function _typeof(obj) {
@@ -1339,7 +1339,7 @@ var handlers = {
     var target = event.target;
     var action;
 
-    if (options.cursorMode) {
+    if (options.cursorMode && (target === this.canvas || target.parentElement === this.canvas)) {
       action = getData(canvas, DATA_ACTION);
     } else {
       action = getData(target, DATA_ACTION);
