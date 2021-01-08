@@ -1,7 +1,7 @@
 {
   "name": "@jessehu/viewerjs",
   "description": "JavaScript image viewer for weibo feed.",
-  "version": "1.0.7",
+  "version": "1.0.12",
   "main": "dist/viewer.common.js",
   "module": "dist/viewer.esm.js",
   "browser": "dist/viewer.js",
