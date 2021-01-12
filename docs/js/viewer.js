@@ -1,11 +1,11 @@
 /*!
- * Viewer.js v1.0.13
+ * Viewer.js v1.0.14
  * https://zhibuzu.github.io/viewerjs
  *
  * Copyright 2015-present Jesse Hu
  * Released under the MIT license
  *
- * Date: 2021-01-08T08:41:03.556Z
+ * Date: 2021-01-12T09:40:01.039Z
  */
 
 (function (global, factory) {
@@ -1074,7 +1074,7 @@
       this.viewerData = assign({}, viewerData);
     },
     renderViewer: function renderViewer() {
-      if (this.options.inline && !this.fulled) {
+      if (this.options.inline && (!this.fulled || this.options.inlineChangeDefault)) {
         setStyle(this.viewer, this.viewerData);
       }
     },

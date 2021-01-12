@@ -66,7 +66,7 @@ export default {
   },
 
   renderViewer() {
-    if (this.options.inline && !this.fulled) {
+    if (this.options.inline && (!this.fulled || this.options.inlineChangeDefault)) {
       setStyle(this.viewer, this.viewerData);
     }
   },
